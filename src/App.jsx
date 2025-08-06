@@ -1,34 +1,50 @@
-import { Formik, Field, Form } from 'formik';
-import { selectUser } from './redux/selectors/auth.selectors';
-import { useSelector, useDispatch } from 'react-redux';
-import { logIn } from './redux/operations/auth.operations';
-import y from './SVG/y.svg'
+import { useEffect, lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { MainLayout } from './components/layouts/MainLayout';
+import { PrivateRoute } from './components/route/PrivateRoute';
+import { RestrictedRoute } from './components/route/RestrictedRoute';
+// import { refreshUser } from './redux/operations/auth.operations';
+import { useAuth } from './hooks';
+
+
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const ContactsPage = lazy(() => import('./pages/ContactsPage'));
+
+
+
 function App() {
+  // const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(refreshUser())
+  // },[dispatch])
 
-  return (
-    <>
-    <img width="84" height="84" src={y} alt="y" />
-    <div>
-    <Formik
-      initialValues={{email: "", password: ""}}
-      onSubmit ={(values) => {
-        dispatch(logIn(values));
-        console.log(user.token);
-      }}>
-        {() => (
-          <Form>
-        <Field name='email' type='email'/>
-        <Field name='password' type='password'/>
-        <button type='submit'>submit</button>
-      </Form>
-        )}
-    </Formik>
-    </div>
-    </>
-  );
+  return isRefreshing ? (
+    <p>Please wait...</p>
+  ) : (
+    <Routes>
+      <Route path='/' element={<MainLayout/>}>
+      <Route index element={<HomePage/>}/>
+      <Route 
+      path='/register'
+      element={<RestrictedRoute redirectTo = "/contacts" component={<RegisterPage />}/>}
+      />
+      <Route
+      path='/login'
+      element={<RestrictedRoute redirectTo = "/contacts" component={<LoginPage />}/>}
+      />
+      <Route 
+      path='/contacts'
+      element={<PrivateRoute redirectTo="/login" component={<ContactsPage/>}/>}
+      />
+      </Route>
+    </Routes>
+  )
 }
 
-export default App;
+export default App
