@@ -1,8 +1,8 @@
-import y from '../../SVG/y.svg'
+import y from '../../SVG/y.svg';
 export const AppBar = () => {
- return(
+  return (
     <>
-        <img width="84" height="84" src={y} alt="y" />
+      <img width="84" height="84" src={y} alt="y" />
     </>
- )   
-}
+  );
+};

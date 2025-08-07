@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
 const client = axios.create({
-    baseURL : "http://localhost:3000/"
+  baseURL: 'http://localhost:3000/',
 });
 
-const setAuthHeader = token => {
-    client.defaults.headers.common.Authorization = `Bearer ${token}`
+const setAuthHeader = (token) => {
+  client.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-    client.defaults.headers.common.Authorization = ""
+  client.defaults.headers.common.Authorization = '';
 };
 
-export {client , setAuthHeader , clearAuthHeader};
+export { client, setAuthHeader, clearAuthHeader };

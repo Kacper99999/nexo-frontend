@@ -1,32 +1,25 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { client , setAuthHeader} from "../../lib/client";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { client, setAuthHeader } from '../../lib/client';
 
+export const register = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
+  try {
+    const res = await client.post('auth/register', credentials);
+    setAuthHeader(res.data.token);
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
-export const register = createAsyncThunk(
-    "auth/register",
-    async(credentials, thunkAPI) => {
-        try {
-            const res = await client.post('auth/register', credentials);
-            setAuthHeader(res.data.token);
-            return res.data;
-        }catch(error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
-    }
-)
-
-export const logIn = createAsyncThunk(
-    "auth/logIn",
-    async (credentials, thunkAPI) => {
-        try {
-            const res = await client.post("auth/login", credentials);
-            setAuthHeader(res.data.token);
-            return res.data;
-        }catch(error){
-            return thunkAPI.rejectWithValue(error.message);
-        }
-    }
-)
+export const logIn = createAsyncThunk('auth/logIn', async (credentials, thunkAPI) => {
+  try {
+    const res = await client.post('auth/login', credentials);
+    setAuthHeader(res.data.token);
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 // export const logOut = createAsyncThunk(
 //     "auth/logOut",
@@ -58,7 +51,3 @@ export const logIn = createAsyncThunk(
 //         }
 //     }
 // )
-
-  
-
-
