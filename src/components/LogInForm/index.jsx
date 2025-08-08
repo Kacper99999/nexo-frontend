@@ -2,7 +2,7 @@ import { Formik, Field, Form } from 'formik';
 import { selectUser } from '../../redux/selectors/auth.selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { logIn } from '../../redux/operations/auth.operations';
-export const LogInForm = () =>{
+export const LogInForm = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -27,4 +27,4 @@ export const LogInForm = () =>{
       </div>
     </>
   );
-}
+};
