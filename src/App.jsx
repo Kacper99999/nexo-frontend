@@ -18,15 +18,16 @@ function App() {
   // useEffect(() => {
   //   dispatch(refreshUser())
   // },[dispatch])
+  if(isRefreshing){
+    return <p>Please wait...</p>
+  };
 
   return (
     <Suspense fallback={<p>Please wait...</p>}>
-      {isRefreshing ? (
-      <p>Please wait...</p>
-    ) : (
+      
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<RestrictedRoute redirectTo="/login" component={<HomePage />} />} />
+        <Route index element={<PrivateRoute redirectTo="/login" component={<HomePage />} />} />
         <Route
           path="/register"
           element={<RestrictedRoute redirectTo="/" component={<RegisterPage />} />}
@@ -35,12 +36,9 @@ function App() {
           path="/login"
           element={<RestrictedRoute redirectTo="/" component={<LoginPage />} />}
         />
-        <Route
-        path='dashboard'
-        element={<PrivateRoute redirectTo='/login' component={<DashboardPage/>} />}></Route>
       </Route>
     </Routes>
-    )}
+    
     </Suspense>
   );
 }

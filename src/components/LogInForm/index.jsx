@@ -1,5 +1,5 @@
 import { Formik, Field, Form } from 'formik';
-import { selectUser } from '../../redux/selectors/auth.selectors';
+import { selectUser, selectIsLoggedIn } from '../../redux/selectors/auth.selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { logIn } from '../../redux/operations/auth.operations';
 export const LogInForm = () => {
@@ -13,7 +13,7 @@ export const LogInForm = () => {
           initialValues={{ email: '', password: '' }}
           onSubmit={(values) => {
             dispatch(logIn(values));
-            console.log(user.token);
+            setTimeout(() => console.log(user))
           }}
         >
           {() => (
