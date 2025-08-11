@@ -1,8 +1,11 @@
-import y from '../../SVG/y.svg';
+import Logo from '../Logo';
+import css from './AppBar.module.css'
 export const AppBar = () => {
   return (
     <>
-      <img width="84" height="84" src={y} alt="y" />
+    <header className={css.header}>
+      <Logo/>
+    </header>
     </>
   );
 };
