@@ -1,0 +1,7 @@
+.header{
+    background-color: black;
+}
+
+.header :only-child{
+    color: white;
+}
