@@ -1,7 +1,12 @@
 .header{
     background-color: black;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    column-gap: 500px;
 }
 
-.header :only-child{
+.header * {
     color: white;
 }

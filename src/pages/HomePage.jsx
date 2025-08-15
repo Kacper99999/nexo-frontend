@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux';
-import { selectUser } from '../redux/selectors/auth.selectors';
+import { AppBar } from '../components/AppBar/index.jsx'
+import { PostCreator } from '../components/PostCreator/index.jsx';
 
 export default function HomePage() {
-  const user = useSelector(selectUser);
   return (
     <div>
-      <h1>{`Welcome ${user.user.userName}`}</h1>
-      <p>{`${user.isLoggedIn}`}</p>
+      <AppBar/>
+      <PostCreator></PostCreator>
     </div>
   );
 }
